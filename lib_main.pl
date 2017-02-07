@@ -48,6 +48,37 @@ sub log_and_die
     &log($mes);
     exit(1);
 }
+
+
+sub read_file {
+    my ($file_name) = @_;
+
+    open my $in, '<:encoding(UTF-8)', $file_name or die "Could not open '$file_name' for reading $!";
+    local $/ = undef;
+    my $all = <$in>;
+    close $in;
+
+    return $all;
+
+    # Example: my $data = read_file($file_name);
+    #          $data =~ s/regular expression/replacement text/g;
+    #          print "$data\n";
+}
+
+
+sub write_file {
+    my ($file_name, $content) = @_;
+
+    open my $out, '>:encoding(UTF-8)', $file_name or die "Could not open '$file_name' for writing $!";
+    print $out $content;
+    close $out;
+
+    return;
+    # Example: my $data = read_file($file_name);
+    #          xxxx
+    #          my $out_file = 'out_file.txt';
+    #          write_file($out_file, $data);
+}
  
  
 1;
